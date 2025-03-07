@@ -3,55 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frustration</title>
+  <title>Game Installer</title>
   <style>
     /* General Styles */
     body {
       font-family: 'Georgia', serif;
       background-color: #4B0082; /* Purple */
-      color: #FFF;
+      color: #AF8D5A;
       margin: 0;
       padding: 0;
     }
 
-    /* Scroll Container */
-    .scroll-container {
-      width: 100%;
-      overflow-y: auto;
-      scroll-behavior: smooth;
-    }
-
-    /* Section Styles */
-    .section {
-      width: 100%;
-      min-height: 80vh;
+    /* Title Section with Background Image */
+    .title-section {
+      height: 100vh;
+      background: url('frust2.jpg') no-repeat center center/cover;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 30px 20px;
     }
 
-    /* Title Section */
-    .title h1 {
-      font-size: 5rem;
-      color: #AF8D5A; /* Golden Brown */
-      text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+    /* Shadow Box */
+    .shadow-box {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
+      max-width: 80%;
+    }
+
+    .shadow-box h1 {
+      font-size: 3rem;
+      color: #FFD700; /* Gold */
       margin: 0;
     }
 
-    .title p {
-      font-size: 1.8rem;
-      margin-top: 20px;
+    .shadow-box p {
+      font-size: 1.5rem;
       color: #FFF;
-      margin-bottom: 60px;
+      margin-top: 10px;
+    }
+
+    /* Sections with Increased Scroll Spacing */
+    .section {
+      text-align: center;
+      padding: 100px 50px;
     }
 
     /* Download Section */
     .download-button {
-      background-color: #AF8D5A;
-      color: #4B0082;
+      background-color: #AF8D5A; /* Golden Brown */
+      color: #4B0082; /* Purple */
       padding: 20px 40px;
       font-size: 1.5rem;
       border: none;
@@ -68,11 +72,11 @@
 
     /* Progress Bar */
     .progress-bar {
-      width: 80%;
-      height: 15px;
+      width: 50%;
+      height: 20px;
       background-color: #333;
       border-radius: 5px;
-      margin-top: 20px;
+      margin: 20px auto;
       overflow: hidden;
       display: none;
       position: relative;
@@ -83,184 +87,137 @@
       height: 100%;
       background-color: #AF8D5A;
       border-radius: 5px;
-      transition: width 2s;
+      transition: width 0.5s;
     }
 
     .progress-text {
       position: absolute;
       width: 100%;
-      top: -25px;
-      font-size: 1.3rem;
-      font-weight: bold;
+      text-align: left;
       color: white;
+      font-weight: bold;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     /* Game Requirements */
-    .requirements {
-      background: rgba(0, 0, 0, 0.3);
+    .game-requirements {
+        background:rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
+
+    /* Reviews, Help, and No Turning Back in One Window */
+    .info-box {
+      background:rgba(0, 0, 0, 0.3);
       padding: 30px;
-      border-radius: 15px;
-      text-align: left;
-      max-width: 600px;
-    }
-
-    .requirements ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .requirements li {
-      margin: 10px 0;
-      font-size: 1.3rem;
-    }
-
-    /* Reviews, Help, and Warning Section */
-    .reviews-container {
-      background: rgba(0, 0, 0, 0.4);
-      padding: 30px;
-      border-radius: 15px;
-      max-width: 700px;
+      margin: 50px auto;
+      max-width: 800px;
+      border-radius: 10px;
       text-align: center;
     }
 
     .review-box {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 15px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 600px;
       border-radius: 10px;
-      margin: 10px 0;
-      text-align: center;
-      font-size: 1.3rem;
-      font-style: italic;
-      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-      position: relative;
     }
 
-    /* Star Ratings */
-    .stars {
-      color: gold;
+    .help-text {
+      display: none;
       font-size: 1.5rem;
-      margin-top: 5px;
-    }
-
-    /* Help Option */
-    .help-option {
-      font-size: 1.5rem;
-      color: #FF6347;
-      cursor: pointer;
-      text-decoration: underline;
+      color: #AF8D5A;
       margin-top: 20px;
     }
 
-    .help-option:hover {
-      color: #FF4500;
-    }
-
-    /* Help Box */
-    .help-box {
-      display: none;
+    .warning-text {
       font-size: 1.5rem;
-      color: #FF4500;
-      margin-top: 15px;
+      color: red;
       font-weight: bold;
-    }
-
-    /* No Turning Back */
-    .no-turning-back {
-      font-size: 1.5rem;
-      color: #AF8D5A;
       margin-top: 30px;
-      font-weight: bold;
     }
 
   </style>
 </head>
 <body>
 
-<div class="scroll-container">
   <!-- Title Section -->
-  <div class="section title">
-    <h1>Frustration</h1>
-    <p>Are you ready to lose your mind?</p>
+  <div class="title-section">
+    <div class="shadow-box">
+      <h1>Welcome to the Ultimate Game Installer!</h1>
+      <p>Get ready to download and play the most mind-blowing experience of your life!</p>
+    </div>
   </div>
 
   <!-- Download Section -->
   <div class="section">
     <button class="download-button" id="downloadButton">Download Now</button>
     <div class="progress-bar" id="progressBar">
-      <div class="progress-text" id="progressText">0%</div>
       <div class="progress" id="progress"></div>
+      <span class="progress-text" id="progressText">0%</span>
     </div>
   </div>
 
-  <!-- Game Requirements Section -->
-  <div class="section">
-    <div class="requirements">
-      <h2>💾 Game Requirements:</h2>
-      <ul>
-        <li>🖥️ CPU: Quantum Processor (or a potato)</li>
-        <li>💾 RAM: 32GB (for crying yourself to sleep)</li>
-        <li>🗂️ Storage: 1TB (mostly for error logs)</li>
-        <li>🎮 GPU: RTX 9090 Ti Ultra (or crayons and paper)</li>
-      </ul>
-    </div>
+  <!-- Game Requirements -->
+  <div class="section game-requirements">
+    <h2>Game Requirements</h2>
+    <p>CPU: Quantum i9 Extreme</p>
+    <p>RAM: 64GB of Rage</p>
+    <p>Storage: 1TB (to store your broken dreams)</p>
   </div>
 
-  <!-- Reviews, Help, and No Turning Back -->
-  <div class="section">
-    <div class="reviews-container">
-      <h2>Reviews</h2>
-      <div class="review-box">
-        "This game changed my life... for the worse!" - Gamer
-        <div class="stars">⭐⭐⭐☆☆</div>
-      </div>
-      <div class="review-box">
-        "My keyboard and mouse are now broken, thanks!" - Angry User
-        <div class="stars">⭐⭐☆☆☆</div>
-      </div>
-      <div class="review-box">
-        "Best rage-inducing experience ever!" - Laughing Player
-        <div class="stars">⭐⭐⭐⭐☆</div>
-      </div>
-
-      <p class="help-option" id="helpOption">Click for Help</p>
-      <p class="help-box" id="helpBox">No help 😈</p>
-
-      <p class="no-turning-back">🚨 NO TURNING BACK! 🚨</p>
+  <!-- Reviews, Help, and No Turning Back in One Window -->
+  <div class="info-box">
+    <h2>Reviews</h2>
+    <div class="review-box">
+      <p>⭐⭐⭐⭐⭐ "This game changed my life... for the worse!" - Gamer</p>
     </div>
+    <div class="review-box">
+      <p>⭐⭐⭐⭐⭐ "My keyboard and mouse are now broken, thanks!" - Angry User</p>
+    </div>
+    <div class="review-box">
+      <p>⭐⭐⭐⭐⭐ "Best rage-inducing experience ever!" - Laughing Player</p>
+    </div>
+
+    <h2>Need Help?</h2>
+    <button id="helpButton">Get Help</button>
+    <p><span id="helpText" class="help-text">No help 🚫😂</span></p>
+
+    <p class="warning-text">No Turning Back</p>
   </div>
-</div>
 
-<script>
-  // Download Progress Logic
-  const downloadButton = document.getElementById('downloadButton');
-  const progressBar = document.getElementById('progressBar');
-  const progress = document.getElementById('progress');
-  const progressText = document.getElementById('progressText');
+  <script>
+    // Progress Bar Logic
+    const downloadButton = document.getElementById('downloadButton');
+    const progressBar = document.getElementById('progressBar');
+    const progress = document.getElementById('progress');
+    const progressText = document.getElementById('progressText');
 
-  downloadButton.addEventListener('click', () => {
-    progressBar.style.display = 'block';
-    let progressValue = 0;
+    downloadButton.addEventListener('click', () => {
+      progressBar.style.display = 'block';
+      let percentage = 0;
+      const interval = setInterval(() => {
+        if (percentage < 99) {
+          percentage++;
+          progress.style.width = percentage + "%";
+          progressText.innerText = percentage + "%";
+        } else {
+          clearInterval(interval);
+          progressText.innerText = "No progress";
+        }
+      }, 50);
+    });
 
-    let interval = setInterval(() => {
-      progressValue += Math.random() * 10;
-      if (progressValue >= 99) {
-        progressValue = 99;
-        clearInterval(interval);
-        setTimeout(() => {
-          progressText.innerText = "No Progress";
-        }, 2000);
-      }
-      progress.style.width = progressValue + "%";
-      progressText.innerText = Math.floor(progressValue) + "%";
-    }, 500);
-  });
+    // Help Button Logic
+    const helpButton = document.getElementById('helpButton');
+    const helpText = document.getElementById('helpText');
 
-  // Help Option
-  document.getElementById('helpOption').addEventListener('click', () => {
-    document.getElementById('helpBox').style.display = 'block';
-  });
+    helpButton.addEventListener('click', () => {
+      helpText.style.display = "block";
+    });
 
-</script>
+  </script>
 
 </body>
 </html>
