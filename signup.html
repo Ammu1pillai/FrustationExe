@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frutrsation.Exe Signup</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+
+        body {
+            font-family: 'Rubik Doodle Shadow', cursive;
+            background-color: #800080; /* Purple background */
+            color: #C6A76B; /* PMS 465 C */
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1, h2 {
+            color: #C6A76B;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+
+        /* Falling Digits */
+        .falling-digit {
+            position: absolute;
+            font-size: 48px;
+            font-weight: bold;
+            color: white;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* Pop-up */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Disabled Sign Up */
+        #signup-btn {
+            background-color: grey;
+            cursor: not-allowed;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sign Up for Frutrsation.Exe</h1>
+        <h2>Because Who Needs Stress Relief When You Can Have This?</h2>
+
+        <form onsubmit="return validateForm(event)">
+            <label for="username">Choose a Username:</label>
+            <input type="text" id="username" name="username">
+
+            <label for="password">Create a Password:</label>
+            <input type="text" id="password" oninput="modifyPassword()">
+
+            <label for="phone">Enter Your Phone Number:</label>
+            <input type="text" id="phone" name="phone" readonly onclick="startFallingDigits()">
+
+            <div id="captcha-container">
+                <p id="captcha-text">Prove you are not human:</p>
+                <p id="captcha-question"></p>
+                <input type="text" id="captcha-answer">
+                <button type="button" onclick="checkCaptcha()">Submit Answer</button>
+            </div>
+
+            <button type="submit" id="signup-btn" disabled>Sign Up</button>
+        </form>
+    </div>
+
+    <!-- Pop-up -->
+    <div id="failPopup" class="popup">
+        <span class="close-btn" onclick="closePopup()">✖</span>
+        <p>Oi, you’re useless! Just type in the number manually.</p>
+    </div>
+
+    <script>
+        /* Quirky Password */
+        const passwordMap = { 
+            'a': 'z', 'b': 'x', 'c': 'v', 'd': 'f', 'e': 'r', 'f': 'g', 'g': 'h', 
+            'h': 'j', 'i': 'o', 'j': 'k', 'k': 'l', 'l': 'm', 'm': 'n', 'n': 'b', 
+            'o': 'p', 'p': 'q', 'q': 'w', 'r': 't', 's': 'e', 't': 'y', 'u': 'i', 
+            'v': 'c', 'w': 's', 'x': 'd', 'y': 'u', 'z': 'a', '1': '9', '2': '8', 
+            '3': '7', '4': '6', '5': '0', '6': '4', '7': '3', '8': '2', '9': '1', '0': '5'
+        };
+        
+        function modifyPassword() {
+            let input = document.getElementById("password");
+            let newValue = input.value.split('').map(char => passwordMap[char] || char).join('');
+            input.value = newValue;
+        }
+
+        /* Falling Digits */
+        let failCount = 0;
+
+        function startFallingDigits() {
+            const phoneInput = document.getElementById("phone");
+            phoneInput.value = ""; // Clear previous input
+            
+            for (let i = 0; i < 10; i++) {
+                let digit = Math.floor(Math.random() * 10);
+                let digitElement = document.createElement("span");
+                digitElement.classList.add("falling-digit");
+                digitElement.innerText = digit;
+                digitElement.style.left = `${Math.random() * window.innerWidth}px`;
+                document.body.appendChild(digitElement);
+
+                let speed = Math.random() * 3 + 2;
+                let topPosition = 0;
+                let moveInterval = setInterval(() => {
+                    topPosition += speed;
+                    digitElement.style.top = `${topPosition}px`;
+
+                    if (topPosition > window.innerHeight) {
+                        clearInterval(moveInterval);
+                        document.body.removeChild(digitElement);
+                    }
+                }, 30);
+            }
+
+            failCount++;
+            if (failCount >= 5) {
+                showPopup();
+                phoneInput.removeAttribute("readonly");
+            }
+        }
+
+        function showPopup() {
+            document.getElementById("failPopup").style.display = "block";
+        }
+
+        function closePopup() {
+            document.getElementById("failPopup").style.display = "none";
+        }
+
+        /* Captcha */
+        let captchaIndex = 0;
+        let captchaQuestions = [
+            { q: "What is 5 + 3?", a: "8", fail: "Nice try, bot!" },
+            { q: "What is 4 - 2?", a: "2", fail: "Bet you didn’t attend math class!" },
+            { q: "What is 4 × 5?", a: "20", fail: "Okay bot, seems like you really wanna play this game..." }
+        ];
+
+        function checkCaptcha() {
+            let answer = document.getElementById("captcha-answer").value.trim();
+            let current = captchaQuestions[captchaIndex];
+
+            alert(answer === current.a ? current.fail : "Are you this stupid?");
+            captchaIndex++;
+
+            if (captchaIndex < captchaQuestions.length) {
+                document.getElementById("captcha-question").innerText = captchaQuestions[captchaIndex].q;
+            } else {
+                document.getElementById("signup-btn").disabled = false;
+            }
+        }
+
+        document.getElementById("captcha-question").innerText = captchaQuestions[0].q;
+
+    </script>
+</body>
+</html>
