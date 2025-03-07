@@ -106,7 +106,7 @@
         <h1>Sign Up for Frutrsation.Exe</h1>
         <h2>Because Who Needs Stress Relief When You Can Have This?</h2>
 
-        <form onsubmit="return validateForm(event)">
+        <form onsubmit="return redirectToGames(event)">
             <label for="username">Choose a Username:</label>
             <input type="text" id="username" name="username">
 
@@ -215,6 +215,13 @@
         }
 
         document.getElementById("captcha-question").innerText = captchaQuestions[0].q;
+
+        /* Redirect to games_display.html */
+        function redirectToGames(event) {
+            event.preventDefault();
+            window.location.href = "games_display.html";
+            return false;
+        }
 
     </script>
 </body>
