@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Selection</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+
+        body {
+            font-family: 'Rubik Doodle Shadow', cursive;
+            background-color: #800080; /* Purple background */
+            color: #C6A76B; /* PMS 465 C */
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #C6A76B;
+        }
+
+        .game {
+            margin: 20px 0;
+            cursor: pointer;
+        }
+
+        .game img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+
+        .game img:hover {
+            transform: scale(1.05);
+        }
+
+        .sarcastic-text {
+            font-style: italic;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Choose Your Game</h1>
+
+        <div class="game" onclick="location.href='jumping.html'">
+            <h2>Minecraft</h2>
+            <img src="minecraft.jpeg" alt="Minecraft">
+            <p class="sarcastic-text">Build your dreams, or just dig a hole and stay there.</p>
+        </div>
+
+        <div class="game" onclick="location.href='diff.html'">
+            <h2>GTA 6</h2>
+            <img src="gta vi.jpeg" alt="GTA 6">
+            <p class="sarcastic-text">GTA 6 exclusive on this website! Play at your own risk.</p>
+        </div>
+
+        <div class="game" onclick="location.href='color.html'">
+            <h2>Call of Duty</h2>
+            <img src="cod.jpeg" alt="Call of Duty">
+            <p class="sarcastic-text">No respawns in real life, but who cares? Click to deploy.</p>
+        </div>
+    </div>
+</body>
+</html>
