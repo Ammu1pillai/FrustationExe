@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misleading Color Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #4B0082;
+            color: #f2eee9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .game-container {
+            max-width: 400px;
+            background: rgba(24, 24, 22, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            margin: auto;
+            box-shadow: 0 0 20px gold;
+            transition: box-shadow 0.5s;
+        }
+
+        #color-text {
+            font-size: 50px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        #score, #tries-left {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <h1>Misleading Color Game</h1>
+        <p>Pick the actual color of the text, not the word itself!</p>
+        <div id="color-text">RED</div>
+        <div class="buttons-container" id="buttons-container"></div>
+        <p>Score: <span id="score">0</span></p>
+        <p>Tries Left: <span id="tries-left">10</span></p>
+    </div>
+
+    <script>
+        const colors = ["Red", "Blue", "Green", "Yellow", "Purple"];
+        const colorValues = ["#FF0000", "#0000FF", "#008000", "#FFFF00", "#800080"];
+
+        let score = 0;
+        let triesLeft = 10;
+
+        const colorText = document.getElementById("color-text");
+        const buttonsContainer = document.getElementById("buttons-container");
+        const scoreDisplay = document.getElementById("score");
+        const triesDisplay = document.getElementById("tries-left");
+
+        function newRound() {
+            let randomWordIndex = Math.floor(Math.random() * colors.length);
+            let randomColorIndex = Math.floor(Math.random() * colors.length);
+
+            colorText.innerText = colors[randomWordIndex];  
+            colorText.style.color = colorValues[randomColorIndex];  
+
+            buttonsContainer.innerHTML = ""; 
+
+            colors.forEach((color, index) => {
+                const button = document.createElement("button");
+                button.innerText = color;
+                button.style.backgroundColor = colorValues[index]; 
+
+                button.addEventListener("click", function () {
+                    shuffleButtons();
+
+                    triesLeft--;  // Decrease tries left on every click
+                    if (index === randomColorIndex) {
+                        score++;
+                    }
+
+                    scoreDisplay.innerText = score;
+                    triesDisplay.innerText = triesLeft;
+
+                    if (triesLeft === 0) {
+                        window.location.href = "window.html"; // Redirect after 10 tries
+                    } else {
+                        newRound();
+                    }
+                });
+
+                button.addEventListener("mouseover", function () {
+                    if (Math.random() < 0.3) shuffleButtons();
+                });
+
+                buttonsContainer.appendChild(button);
+            });
+        }
+
+        function shuffleButtons() {
+            let buttons = Array.from(buttonsContainer.children);
+            buttons.sort(() => Math.random() - 0.5);
+            buttons.forEach(button => buttonsContainer.appendChild(button));
+        }
+
+        newRound();
+    </script>
+
+</body>
+</html>
