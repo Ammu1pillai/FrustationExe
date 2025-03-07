@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Over, Bro</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+
+        body {
+            font-family: 'Rubik Doodle Shadow', cursive;
+            background-color: #800080; /* Purple background */
+            color: #C6A76B; /* PMS 465 C */
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 100px; /* Space between buttons */
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .button-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #try-again {
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        #exit {
+            background-color: #d9534f;
+            color: white;
+        }
+
+        /* Image Styling */
+        .button-box img {
+            width: 150px; /* Adjust as needed */
+            height: auto;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        /* Pop-up styling */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            font-size: 18px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Well, That Was...Something</h1>
+    <p>Either you're a gaming god, or you just rage quit. Either way, it's over.</p>
+
+    <div class="button-container">
+        <!-- Try Again Button with Image -->
+        <div class="button-box">
+            <button id="try-again" onclick="tryAgain()">Try Again</button>
+            <img src="./FrustationExe/try1.jpeg" alt="Try Again Image">
+        </div>
+
+        <!-- Exit Button with Image -->
+        <div class="button-box">
+            <button id="exit" onclick="exitGame()">Exit</button>
+            <img src="./FrustationExe/exit1.jpeg" alt="Exit Image">
+        </div>
+    </div>
+
+    <!-- Pop-up Messages -->
+    <div id="popup" class="popup"></div>
+
+    <script>
+        function showPopup(message, duration, callback) {
+            let popup = document.getElementById("popup");
+            popup.innerText = message;
+            popup.style.display = "block";
+
+            setTimeout(() => {
+                popup.style.display = "none";
+                if (callback) callback();
+            }, duration);
+        }
+
+        function tryAgain() {
+            showPopup("Bro, get some sleep tata", 3000, () => {
+                window.close();
+            });
+        }
+
+        function exitGame() {
+            showPopup("We are not letting you go so easily buddy", 3000, () => {
+                window.location.href = "games_display.html";
+            });
+        }
+    </script>
+</body>
+</html>
