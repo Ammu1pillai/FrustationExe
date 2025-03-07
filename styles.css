@@ -4,12 +4,20 @@ body {
   padding: 0;
   font-family: 'Arial', sans-serif;
   background: linear-gradient(135deg, #4a148c, #ffd700);
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   overflow: hidden;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .container {
@@ -28,23 +36,17 @@ h1 {
   margin-bottom: 20px;
 }
 
-button {
-  padding: 15px 30px;
-  font-size: 1.2rem;
-  color: #fff;
-  background: linear-gradient(135deg, #ffd700, #4a148c);
-  border: none;
-  border-radius: 50px;
+#treasure-chest {
+  width: 100px; /* Adjust size as needed */
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s ease;
   position: absolute;
-  top: 50%; /* Center the button vertically */
-  left: 50%; /* Center the button horizontally */
+  top: 50%; /* Center the treasure chest vertically */
+  left: 50%; /* Center the treasure chest horizontally */
   transform: translate(-50%, -50%); /* Adjust for exact center */
+  transition: transform 0.2s ease;
 }
 
-button:hover {
+#treasure-chest:hover {
   transform: translate(-50%, -50%) scale(1.1); /* Scale effect on hover */
 }
 

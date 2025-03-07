@@ -1,33 +1,33 @@
-const button = document.getElementById('runaway-btn');
+const treasureChest = document.getElementById('treasure-chest');
 const timesUpMessage = document.getElementById('times-up');
 const countdownDisplay = document.getElementById('countdown');
 
 let timeLeft = 30; // 30 seconds
 
-// Function to move the button randomly
-const moveButton = () => {
+// Function to move the treasure chest randomly
+const moveTreasureChest = () => {
   const x = Math.floor(Math.random() * (window.innerWidth - 100));
   const y = Math.floor(Math.random() * (window.innerHeight - 100));
-  button.style.left = `${x}px`;
-  button.style.top = `${y}px`;
+  treasureChest.style.left = `${x}px`;
+  treasureChest.style.top = `${y}px`;
 };
 
-// Event listener to move the button when hovered
-button.addEventListener('mouseover', moveButton);
+// Event listener to move the treasure chest when hovered
+treasureChest.addEventListener('mouseover', moveTreasureChest);
 
 // Function to update the countdown
 const updateCountdown = () => {
   if (timeLeft > 0) {
-    countdownDisplay.textContent = `You have ${timeLeft} seconds to live.`;
+    countdownDisplay.textContent = `You have ${timeLeft} seconds to open the chest.`;
     timeLeft--;
   } else {
     clearInterval(countdownInterval); // Stop the countdown
 
-    // Stop the button from moving
-    button.removeEventListener('mouseover', moveButton);
+    // Stop the treasure chest from moving
+    treasureChest.removeEventListener('mouseover', moveTreasureChest);
 
-    // Hide the button
-    button.style.display = 'none';
+    // Hide the treasure chest
+    treasureChest.style.display = 'none';
 
     // Clear the countdown message
     countdownDisplay.textContent = '';
