@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frustration</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Georgia', serif;
+      background-color: #4B0082; /* Purple */
+      color: #FFF;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Scroll Container */
+    .scroll-container {
+      width: 100%;
+      overflow-y: auto;
+      scroll-behavior: smooth;
+    }
+
+    /* Section Styles */
+    .section {
+      width: 100%;
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    /* Title Section */
+    .title h1 {
+      font-size: 5rem;
+      color: #AF8D5A; /* Golden Brown */
+      text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+      margin: 0;
+    }
+
+    .title p {
+      font-size: 1.8rem;
+      margin-top: 20px;
+      color: #FFF;
+      margin-bottom: 60px;
+    }
+
+    /* Download Section */
+    .download-button {
+      background-color: #AF8D5A;
+      color: #4B0082;
+      padding: 20px 40px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .download-button:hover {
+      transform: scale(1.1);
+      box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      width: 80%;
+      height: 15px;
+      background-color: #333;
+      border-radius: 5px;
+      margin-top: 20px;
+      overflow: hidden;
+      display: none;
+      position: relative;
+    }
+
+    .progress {
+      width: 0%;
+      height: 100%;
+      background-color: #AF8D5A;
+      border-radius: 5px;
+      transition: width 2s;
+    }
+
+    .progress-text {
+      position: absolute;
+      width: 100%;
+      top: -25px;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    /* Game Requirements */
+    .requirements {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: left;
+      max-width: 600px;
+    }
+
+    .requirements ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .requirements li {
+      margin: 10px 0;
+      font-size: 1.3rem;
+    }
+
+    /* Reviews, Help, and Warning Section */
+    .reviews-container {
+      background: rgba(0, 0, 0, 0.4);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 700px;
+      text-align: center;
+    }
+
+    .review-box {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 15px;
+      border-radius: 10px;
+      margin: 10px 0;
+      text-align: center;
+      font-size: 1.3rem;
+      font-style: italic;
+      box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    /* Star Ratings */
+    .stars {
+      color: gold;
+      font-size: 1.5rem;
+      margin-top: 5px;
+    }
+
+    /* Help Option */
+    .help-option {
+      font-size: 1.5rem;
+      color: #FF6347;
+      cursor: pointer;
+      text-decoration: underline;
+      margin-top: 20px;
+    }
+
+    .help-option:hover {
+      color: #FF4500;
+    }
+
+    /* Help Box */
+    .help-box {
+      display: none;
+      font-size: 1.5rem;
+      color: #FF4500;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    /* No Turning Back */
+    .no-turning-back {
+      font-size: 1.5rem;
+      color: #AF8D5A;
+      margin-top: 30px;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="scroll-container">
+  <!-- Title Section -->
+  <div class="section title">
+    <h1>Frustration</h1>
+    <p>Are you ready to lose your mind?</p>
+  </div>
+
+  <!-- Download Section -->
+  <div class="section">
+    <button class="download-button" id="downloadButton">Download Now</button>
+    <div class="progress-bar" id="progressBar">
+      <div class="progress-text" id="progressText">0%</div>
+      <div class="progress" id="progress"></div>
+    </div>
+  </div>
+
+  <!-- Game Requirements Section -->
+  <div class="section">
+    <div class="requirements">
+      <h2>💾 Game Requirements:</h2>
+      <ul>
+        <li>🖥️ CPU: Quantum Processor (or a potato)</li>
+        <li>💾 RAM: 32GB (for crying yourself to sleep)</li>
+        <li>🗂️ Storage: 1TB (mostly for error logs)</li>
+        <li>🎮 GPU: RTX 9090 Ti Ultra (or crayons and paper)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Reviews, Help, and No Turning Back -->
+  <div class="section">
+    <div class="reviews-container">
+      <h2>Reviews</h2>
+      <div class="review-box">
+        "This game changed my life... for the worse!" - Gamer
+        <div class="stars">⭐⭐⭐☆☆</div>
+      </div>
+      <div class="review-box">
+        "My keyboard and mouse are now broken, thanks!" - Angry User
+        <div class="stars">⭐⭐☆☆☆</div>
+      </div>
+      <div class="review-box">
+        "Best rage-inducing experience ever!" - Laughing Player
+        <div class="stars">⭐⭐⭐⭐☆</div>
+      </div>
+
+      <p class="help-option" id="helpOption">Click for Help</p>
+      <p class="help-box" id="helpBox">No help 😈</p>
+
+      <p class="no-turning-back">🚨 NO TURNING BACK! 🚨</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Download Progress Logic
+  const downloadButton = document.getElementById('downloadButton');
+  const progressBar = document.getElementById('progressBar');
+  const progress = document.getElementById('progress');
+  const progressText = document.getElementById('progressText');
+
+  downloadButton.addEventListener('click', () => {
+    progressBar.style.display = 'block';
+    let progressValue = 0;
+
+    let interval = setInterval(() => {
+      progressValue += Math.random() * 10;
+      if (progressValue >= 99) {
+        progressValue = 99;
+        clearInterval(interval);
+        setTimeout(() => {
+          progressText.innerText = "No Progress";
+        }, 2000);
+      }
+      progress.style.width = progressValue + "%";
+      progressText.innerText = Math.floor(progressValue) + "%";
+    }, 500);
+  });
+
+  // Help Option
+  document.getElementById('helpOption').addEventListener('click', () => {
+    document.getElementById('helpBox').style.display = 'block';
+  });
+
+</script>
+
+</body>
+</html>
